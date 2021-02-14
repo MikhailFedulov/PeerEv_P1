@@ -1,0 +1,46 @@
+type Course @model {
+    id: ID!
+    courseOwnerId: String!
+    courseOwnerUsername: String!
+    courseTitle: String!
+    courseBody: String!
+    createdAt: String
+    hastask: Task @connection(name: "CourseTask")
+    numberofstudents: Int!
+    groups: [Groups] @connection(name: "CourseGroups")
+
+}
+
+type Task @model {
+    id: ID!
+    taskOwnerId: String!
+    taskOwnerUsername: String!
+    taskTitle: String!
+    taskBody: String!
+    taskcontent: String!
+    course: Course @connection(name: "CourseTask")
+    question: [Question] @connection(name: "TaskQuestions")
+    createdAt: String!
+}
+
+type Question @model {
+    id: ID!
+    qOwnerId: String!
+    qTitle: String!
+    qBody: String!
+    numberofQuestions: Int!
+    task: Task @connection(name: "TaskQuestions")
+    createdAt: String!
+
+}
+
+type Groups @model {
+    id: ID!
+    groupOwnerId: String!
+    groupOwnerUsername: String!
+    numberofStudents: Int!
+    averagemark: Float
+    course: Course @connection(name: "CourseGroups")
+
+
+}
